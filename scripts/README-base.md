@@ -2,9 +2,9 @@
   <img width="320" src="https://wpimg.wallstcn.com/9e77e0ae-3018-45a2-bf9f-1a4c88dd300a.svg">
 </p>
 
-在线地址：https://panjiachen.github.io/awesome-bookmarks
+在线地址：https://lmsite.cn
 
-<!-- 个人 Blog 文章地址：https://panjiachen.github.io/awesome-bookmarks/blog/js.html -->
+<!-- 个人 Blog 文章地址：https://lmsite.cn/blog/js.html -->
 
 gitee 访问地址(github.io 有时候在国内访问会很慢)：[awesome-bookmarks](https://panjiachen.gitee.io/awesome-bookmarks/)
 

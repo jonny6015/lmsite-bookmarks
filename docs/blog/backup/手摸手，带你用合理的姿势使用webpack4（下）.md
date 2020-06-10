@@ -1,4 +1,4 @@
-> 本文作者来自 [华尔街见闻技术团队](https://www.zhihu.com/org/hua-er-jie-jian-wen-ji-zhu-tuan-dui-92/activities) - [花裤衩](https://github.com/PanJiaChen)
+> 本文作者来自 [华尔街见闻技术团队](https://www.zhihu.com/org/hua-er-jie-jian-wen-ji-zhu-tuan-dui-92/activities) - [花裤衩](https://github.com/jonny6015)
 
 推荐先阅读 webpack 入门教程之后再来阅读本文。
 
@@ -18,7 +18,7 @@ webpack 4 的`Code Splitting` 它最大的特点就是配置简单，如果你�
 
 ![](https://user-gold-cdn.xitu.io/2018/7/24/164cac10a2222794?w=3348&h=1880&f=jpeg&s=720643)
 
-> 以下内容都会以 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 为例子。 在线
+> 以下内容都会以 [vue-element-admin](https://github.com/jonny6015/vue-element-admin) 为例子。 在线
 > [bundle-report](https://panjiachen.gitee.io/vue-element-admin/bundle-report)
 
 如上图所示，在没配置任何东西的情况下，webpack 4 就智能的帮你做了代码分包。入口文件依赖的文件都被打包进了`app.js`，那些大于 30kb 的第三方包，如：`echarts`、`xlsx`、`dropzone`等都被单独打包成了一个个独立 bundle。
@@ -32,7 +32,7 @@ webpack 4 的`Code Splitting` 它最大的特点就是配置简单，如果你�
 
 ![](https://user-gold-cdn.xitu.io/2018/7/31/164efb0fedb0bef7?w=2148&h=1130&f=jpeg&s=269718)
 
-但有一些小的组件，如上图：[vue-count-to](https://github.com/PanJiaChen/vue-countTo) 在未压缩的情况下只有 5kb，虽然它被两个页面共用了，但 webpack 4 默认的情况下还是会将它和那些懒加载的页面代码打包到一起，并不会单独将它拆成一个独立的 bundle。（虽然被共用了，但因为体积没有大于 30kb）
+但有一些小的组件，如上图：[vue-count-to](https://github.com/jonny6015/vue-countTo) 在未压缩的情况下只有 5kb，虽然它被两个页面共用了，但 webpack 4 默认的情况下还是会将它和那些懒加载的页面代码打包到一起，并不会单独将它拆成一个独立的 bundle。（虽然被共用了，但因为体积没有大于 30kb）
 
 你可能会觉得 webpack 默认策略是不是有问题，我一个组件被多个页面，你每个页面都将这个组件打包进去了，岂不是会重复打包很多次这个组件？就拿`vue-count-to`来举例，你可以把共用`两次以上`的组件或者代码单独抽出来打包成一个 bundle，但你不要忘了`vue-count-to`未压缩的情况下就只有 5kb，gizp 压缩完可能只有 1.5kb 左右，你为了共用这 1.5kb 的代码，却要额外花费一次 http 请求的时间损耗，得不偿失。我个人认为 webpack 目前默认的打包规则是一个比较合理的策略了。
 
@@ -42,7 +42,7 @@ webpack 4 的`Code Splitting` 它最大的特点就是配置简单，如果你�
 
 ## 优化分包策略
 
-就拿 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 来说，它是一个基于 [Element-UI](https://github.com/ElemeFE/element) 的管理后台，所以它会用到如 `echarts`、`xlsx`、`dropzone`等各种第三方插件，同时又由于是管理后台，所以本身自己也会写很多共用组件，比如各种封装好的搜索查询组件，共用的业务模块等等，如果按照默认的拆包规则，结果就不怎么完美了。
+就拿 [vue-element-admin](https://github.com/jonny6015/vue-element-admin) 来说，它是一个基于 [Element-UI](https://github.com/ElemeFE/element) 的管理后台，所以它会用到如 `echarts`、`xlsx`、`dropzone`等各种第三方插件，同时又由于是管理后台，所以本身自己也会写很多共用组件，比如各种封装好的搜索查询组件，共用的业务模块等等，如果按照默认的拆包规则，结果就不怎么完美了。
 
 如第一张图所示，由于`element-ui`在`entry`入口文件中被引入并且被大量页面共用，所以它默认会被打包到 `app.js` 之中。这样做是不合理的，因为`app.js`里还含有你的`router 路由声明`、`store 全局状态`、`utils 公共函数`，`icons 图标`等等这些全局共用的东西。
 
@@ -279,7 +279,7 @@ console.log('apple')
 我们在固定了 module id 之后同理也需要固定一下 chunk id，不然我们增加 chunk 或者减少 chunk 的时候会和 module id 一样，都可能会导致 chunk 的顺序发生错乱，从而让 chunk 的缓存都失效。
 
 作者也意识到了这个问题，提供了一个叫`NamedChunkPlugin`的插件，但在使用路由懒加载的情况下，你会发现`NamedChunkPlugin`并没什么用。
-供了一个线上[demo](https://github.com/PanJiaChen/chunk-test)，可以自行测一下。这里提就直接贴一下结果：
+供了一个线上[demo](https://github.com/jonny6015/chunk-test)，可以自行测一下。这里提就直接贴一下结果：
 
 ![](https://user-gold-cdn.xitu.io/2018/8/6/1650fa11fadb581f?w=1426&h=306&f=jpeg&s=179459)
 

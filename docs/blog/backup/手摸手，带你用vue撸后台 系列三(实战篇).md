@@ -1,4 +1,4 @@
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 系列文章：
 
@@ -119,7 +119,7 @@ head.appendChild(style);
 
 ## 侧边栏
 
-这里又有谈一下导航栏的问题，本项目里的侧边栏是根据 router.js 配置的路由并且根据权限动态生成的，这样就省去了写一遍路由还要手动再写一次侧边栏这种麻烦事，但也遇到了一个问题，路由可能会有多层嵌套，很多人反馈自己的侧边栏会有三级，甚至还有五级的。所以重构了一下侧边栏，使用了递归组件，这样不管你多少级，都能愉快的显示了。[代码](https://github.com/PanJiaChen/vue-element-admin/tree/master/src/views/layout/components/Sidebar)
+这里又有谈一下导航栏的问题，本项目里的侧边栏是根据 router.js 配置的路由并且根据权限动态生成的，这样就省去了写一遍路由还要手动再写一次侧边栏这种麻烦事，但也遇到了一个问题，路由可能会有多层嵌套，很多人反馈自己的侧边栏会有三级，甚至还有五级的。所以重构了一下侧边栏，使用了递归组件，这样不管你多少级，都能愉快的显示了。[代码](https://github.com/jonny6015/vue-element-admin/tree/master/src/views/layout/components/Sidebar)
 
 ![](https://lc-gold-cdn.xitu.io/f9230d730d863040dc91)**侧边栏高亮问题:** 很多人在群里问为什么自己的侧边栏不能跟着自己的路由高亮，其实很简单，element-ui 官方已经给了 default-active 所以我们只要
 
@@ -179,7 +179,7 @@ this.sortable = Sortable.create(el, {
 });
 ```
 
-这样我们就简单的完成了 table 拖拽排序。这里如果不是基于 dom 的排序推荐使用[Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)。[完整代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/example/table/dragTable.vue)
+这样我们就简单的完成了 table 拖拽排序。这里如果不是基于 dom 的排序推荐使用[Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)。[完整代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/example/table/dragTable.vue)
 
 ---
 
@@ -188,7 +188,7 @@ this.sortable = Sortable.create(el, {
 table 内联编辑也是一个常见的需求。
 
 ![](https://lc-gold-cdn.xitu.io/80da236c5cbc3b06e9f5.gif)
-其实也很简单，当我们拿到 list 数据之后先洗一下数据，每一条数据里面插入一个 edit[ true or false ]判断符，来表示当前行是否处于编辑状态。之后就是通过 v-show 动态切换不同的相应 view 就可以了。[完整代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/example/table/inlineEditTable.vue)
+其实也很简单，当我们拿到 list 数据之后先洗一下数据，每一条数据里面插入一个 edit[ true or false ]判断符，来表示当前行是否处于编辑状态。之后就是通过 v-show 动态切换不同的相应 view 就可以了。[完整代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/example/table/inlineEditTable.vue)
 
 ```
 <el-table-column min-width="300px" label="标题">
@@ -303,7 +303,7 @@ Upload 本身没什么好说的，文档写的蛮清楚了。这里主要说一�
 
 ![](https://lc-gold-cdn.xitu.io/2b136a93af9689131d6c)
 这时候我们又发现了 before-upload 这个钩子还支持 promise 简直合我们的心意。
-但我们写着写着怎样才能动态的改变之前的 dataObj 呢？通过看源码发现我们可以\_self.\_data 这样子拿到我们想要的数据。[线上代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/qiniu/upload.vue)
+但我们写着写着怎样才能动态的改变之前的 dataObj 呢？通过看源码发现我们可以\_self.\_data 这样子拿到我们想要的数据。[线上代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/qiniu/upload.vue)
 
 ```
 <template>
@@ -410,7 +410,7 @@ npm install\
 }
 ```
 
-建议向楼主一样专门建一个 scss 文件里专门自定义 element-ui 的各种样式。[线上代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/styles/element-ui.scss)
+建议向楼主一样专门建一个 scss 文件里专门自定义 element-ui 的各种样式。[线上代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/styles/element-ui.scss)
 
 其它关于 element 相关的东西真的没有什么好说的了，人家文档和源码就放在那里，有问题就去看文档，再去 issue 里找找，再去看看源码，大部分问题都能解决了。给一个诀窍其实大部分诡异的问题都可以通过加一个 key 或者
 Vue.nextTick 来解决。。
@@ -473,7 +473,7 @@ import('showdown').then(showdown => { //用了 Dynamic import
 
 这里先明确一点，如果你的业务需求对导出文件的格式没有什么要求，不建议导出成 xlsx 格式的，直接导出成 csv 的就好了，真的会简单很多。创建一个 a 标签，写上`data:text/csv;charset=utf-8`头，再把数据塞进去，`encodeURI(csvContent)`一下就好了，详情就不展开了，大家可以借鉴这个[stackoverflow 回答](https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side)。
 我们重点说一下转 xlsx，我们这里用到了[js-xlsx](https://github.com/SheetJS/js-xlsx)，一个功能很强大 excel 处理库，只是下载各种格式 excel，还支持读取 excel，但上手难度也非常大，相当的复杂，其中涉及不少二进制相关的东西。不过好在官方给了我们一个[demo 例子](http://sheetjs.com/demos/writexlsx.html),我们写不来还抄不来么，于是我们就借鉴官方的例子来改造了一下，具体原理就不详细说了，真的很复杂。。。
-重点是我们怎么使用！首先我们封装一个[Export2Excel.js](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/vendor/Export2Excel.js)，
+重点是我们怎么使用！首先我们封装一个[Export2Excel.js](https://github.com/jonny6015/vue-element-admin/blob/master/src/vendor/Export2Excel.js)，
 它又依赖三个库
 
 ```
@@ -503,7 +503,7 @@ formatJson(filterVal, jsonData) {
 
 ```
 
-[完整显示线上代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/excel/index.vue)
+[完整显示线上代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/excel/index.vue)
 
 ---
 
@@ -612,7 +612,7 @@ created() {
 ## 占坑
 
 常规占坑，这里是手摸手，带你用 vue 撸后台系列。
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 - [手摸手，带你用 vue 撸后台 系列一（基础篇）](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 - [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)

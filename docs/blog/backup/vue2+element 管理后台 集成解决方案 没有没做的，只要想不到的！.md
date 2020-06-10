@@ -1,4 +1,4 @@
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 系类文章一：[手摸手，带你用 vue 撸后台 系列一（基础篇）](https://segmentfault.com/a/1190000009275424)
 系类文章二：[手摸手，带你用 vue 撸后台 系列二（登录权限篇）](https://segmentfault.com/a/1190000009506097)
 系类文章三：[手摸手，带你用 vue 撸后台 系列三(实战篇）](https://segmentfault.com/a/1190000009762198)
@@ -41,7 +41,7 @@
 
 ```bash
     # 克隆项目
-    git clone https://github.com/PanJiaChen/vue-element-admin.git
+    git clone https://github.com/jonny6015/vue-element-admin.git
 
     # 安装依赖
     npm install
@@ -65,7 +65,7 @@
 ## 目录结构
 
 ```shell
-├── build                      // 构建相关  
+├── build                      // 构建相关
 ├── config                     // 配置相关
 ├── src                        // 源代码
 │   ├── api                    // 所以请求

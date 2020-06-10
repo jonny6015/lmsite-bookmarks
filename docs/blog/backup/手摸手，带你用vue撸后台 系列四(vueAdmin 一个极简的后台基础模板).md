@@ -1,4 +1,4 @@
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 系列文章：
 
@@ -14,7 +14,7 @@
 
 ## 前言
 
-做这个 **vueAdmin-template** 的主要原因是: [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 这个项目的初衷是一个 vue 的管理后台集成方案，把平时用到的一些组件或者经验分享给大家，同时它也在不断的维护和拓展中，比如最近重构了 dashboard，加入了全屏功能，新增了 tabs-view 等等。所以项目会越来越复杂，不太适合很多初用 vue 的同学来构建后台。所以就写了这个基础模板，它没有复杂的功能，只包含了一个后台需要最基础的东西。
+做这个 **vueAdmin-template** 的主要原因是: [vue-element-admin](https://github.com/jonny6015/vue-element-admin) 这个项目的初衷是一个 vue 的管理后台集成方案，把平时用到的一些组件或者经验分享给大家，同时它也在不断的维护和拓展中，比如最近重构了 dashboard，加入了全屏功能，新增了 tabs-view 等等。所以项目会越来越复杂，不太适合很多初用 vue 的同学来构建后台。所以就写了这个基础模板，它没有复杂的功能，只包含了一个后台需要最基础的东西。
 **vueAdmin-template** 主要是基于 vue-cli webpack 模板为基础开发的，引入了如下 dependencies:
 
 - element-ui 饿了么出品的 vue2.0 pc UI 框架
@@ -26,7 +26,7 @@
 - vue-router 官方路由
 
 该项目只做了一个管理后台需要极简的功能，封装了 axios 请求，支持无限层级路由，动态权限和动态侧边栏。
-如果需要更多复杂的功能可以参考 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)，若还有不足，欢迎提 issue 或者 pr。下文会简单说一下用该模板需要注意的地方。
+如果需要更多复杂的功能可以参考 [vue-element-admin](https://github.com/jonny6015/vue-element-admin)，若还有不足，欢迎提 issue 或者 pr。下文会简单说一下用该模板需要注意的地方。
 
 ---
 
@@ -40,7 +40,7 @@ const Foo = resolve => require(['./Foo.vue'], resolve)
 const Foo = () => import('./Foo')
 ```
 
-在懒加载页面不多的情况下一切是那么的美好，但我司后台业务在不断地迭代，现在项目近百个路由，这时候使用路由懒加载在开发模式下就是一件痛苦的事情了，随手改一行代码热更新都是要 6000ms+的，这怎么能忍。楼主整整花了一天多的时间找原因，能 webpack 优化的方法都用了,什么 `dll`, `HappyPack` 等方法都是过了，但提升的效果都不是很明显，正好那段时间出了 `webpack3` 楼主也升级了，编译速度也得到了很大幅度的提升，不过也要 2000ms+。后来经过大神 [@jzlxiaohei](https://github.com/jzlxiaohei) 的指点发现原来是路由懒加载搞得鬼，楼主猜测可能是异步加载导致 webpack 每次的 cache 失效了，所以每次的 rebuild 才会这么的慢。找到了原因我们就可以对症下药了，我们就自己封装了一个`_import()`的方法，只有在正式环境下才使用懒加载。这样解决了困扰多事的 rebuild 慢问题。[代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/router/index.js#L3)
+在懒加载页面不多的情况下一切是那么的美好，但我司后台业务在不断地迭代，现在项目近百个路由，这时候使用路由懒加载在开发模式下就是一件痛苦的事情了，随手改一行代码热更新都是要 6000ms+的，这怎么能忍。楼主整整花了一天多的时间找原因，能 webpack 优化的方法都用了,什么 `dll`, `HappyPack` 等方法都是过了，但提升的效果都不是很明显，正好那段时间出了 `webpack3` 楼主也升级了，编译速度也得到了很大幅度的提升，不过也要 2000ms+。后来经过大神 [@jzlxiaohei](https://github.com/jzlxiaohei) 的指点发现原来是路由懒加载搞得鬼，楼主猜测可能是异步加载导致 webpack 每次的 cache 失效了，所以每次的 rebuild 才会这么的慢。找到了原因我们就可以对症下药了，我们就自己封装了一个`_import()`的方法，只有在正式环境下才使用懒加载。这样解决了困扰多事的 rebuild 慢问题。[代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/router/index.js#L3)
 
 ```javascript
 const _import = require('./_import_' + process.env.NODE_ENV)
@@ -64,7 +64,7 @@ const Foo = _import('Foo')
 **侧边栏**:本项目里的侧边栏是根据 router.js 配置的路由并且根据权限动态生成的，这样就省去了写一遍路由还要再手动写侧边栏这种麻烦事，同是使用了递归组件，这样不管你路由多少级嵌套，都能愉快的显示了。权限验证那里也做了递归的处理。
 ![](https://user-gold-cdn.xitu.io/2017/7/4/26ddf859b6d3b175f08d10cc4502c3f8)
 
-**面包屑**:本项目中也封装了一个面包屑导航，它也是通过`watch $route`动态生成的。[代码](https://github.com/PanJiaChen/vue-admin-template/blob/master/src/components/Breadcrumb/index.vue)
+**面包屑**:本项目中也封装了一个面包屑导航，它也是通过`watch $route`动态生成的。[代码](https://github.com/jonny6015/vue-admin-template/blob/master/src/components/Breadcrumb/index.vue)
 
 ![](https://user-gold-cdn.xitu.io/2017/7/4/cdfd13e3861242c05acb01d3ad39afb0)
 由于侧边栏导航和面包屑亦或是权限，你会发现其实都是和 router 密切相关的，所以基于 vue-router 路由信息对象上做了一下小小的拓展，自定义了一些属性
@@ -89,7 +89,7 @@ element-ui 自带的图标不是很丰富，但管理后台图标的定制性又
 之后我们点击下载 Symbol，会发现有如下这些文件，我们只要关心`iconfont.js`就可以了
 
 ![](https://user-gold-cdn.xitu.io/2017/7/4/d18f61f6be205b80ed146d564b10433e)
-我们将它替换项目中的 [iconfont.js](https://github.com/PanJiaChen/vue-admin-template/blob/master/src/assets/iconfont/iconfont.js) 就可以了。本项目中也封装了一个[svg component](https://github.com/PanJiaChen/vue-admin-template/blob/master/src/components/SvgIcon/index.vue) 方便大家使用。
+我们将它替换项目中的 [iconfont.js](https://github.com/jonny6015/vue-admin-template/blob/master/src/assets/iconfont/iconfont.js) 就可以了。本项目中也封装了一个[svg component](https://github.com/jonny6015/vue-admin-template/blob/master/src/components/SvgIcon/index.vue) 方便大家使用。
 
 ```html
 <icon-svg icon-class="填入你需要的iconfont名字就能使用了"></icon-svg>
@@ -121,7 +121,7 @@ new HtmlWebpackPlugin({
 
 ## eslint
 
-`vue cli` 默认提供了`standard`和`airbnb` 两种 lint 规范，说真的一个 j 检查校验的太松一个又太紧，而且每个团队的 lint 规范又是不同的，所以楼主干脆在项目里把大部分常用的 lint 规范都列举了出来并写上了注释方便大家修改[代码地址](https://github.com/PanJiaChen/vue-admin-template/blob/master/.eslintrc.js)，大家也可以把自己的规范上传到 npm，像 vue 一样 [vue-eslint-config](https://github.com/vuejs/eslint-config-vue)。配置 eslint 对多人协作的项目有很大的好处,同时配置好 lint 在加 ide 的 lint 插件写代码简直要起飞。相关配置可见[第一篇教程](https://segmentfault.com/a/1190000009275424#articleHeader8)。
+`vue cli` 默认提供了`standard`和`airbnb` 两种 lint 规范，说真的一个 j 检查校验的太松一个又太紧，而且每个团队的 lint 规范又是不同的，所以楼主干脆在项目里把大部分常用的 lint 规范都列举了出来并写上了注释方便大家修改[代码地址](https://github.com/jonny6015/vue-admin-template/blob/master/.eslintrc.js)，大家也可以把自己的规范上传到 npm，像 vue 一样 [vue-eslint-config](https://github.com/vuejs/eslint-config-vue)。配置 eslint 对多人协作的项目有很大的好处,同时配置好 lint 在加 ide 的 lint 插件写代码简直要起飞。相关配置可见[第一篇教程](https://segmentfault.com/a/1190000009275424#articleHeader8)。
 
 ## postcss
 
@@ -212,7 +212,7 @@ module.exports = {
 
 ## easy-mock
 
-[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 由于是一个纯前端个人项目,所以所以的数据都是用[mockjs](https://github.com/nuysoft/Mock)生成的,它的原理是:拦截了所有的请求并代理到本地模拟数据，所以 network 中没有任何的请求发出。不过这并不符合实际业务开发中的场景，所以这个项目中使用了前不久刚出的 [easy-mock](https://easy-mock.com/)，支持跨域，mockjs 的语法，支持 Swagger 这几点还是挺不错的。[相关文章](https://juejin.im/post/58ff1fae61ff4b0066792f6e)
+[vue-element-admin](https://github.com/jonny6015/vue-element-admin) 由于是一个纯前端个人项目,所以所以的数据都是用[mockjs](https://github.com/nuysoft/Mock)生成的,它的原理是:拦截了所有的请求并代理到本地模拟数据，所以 network 中没有任何的请求发出。不过这并不符合实际业务开发中的场景，所以这个项目中使用了前不久刚出的 [easy-mock](https://easy-mock.com/)，支持跨域，mockjs 的语法，支持 Swagger 这几点还是挺不错的。[相关文章](https://juejin.im/post/58ff1fae61ff4b0066792f6e)
 
 ## baseurl
 
@@ -339,12 +339,12 @@ export function getInfo(token) {
 
 ## 总结
 
-这篇文章主要是介绍了 **vueAdmin** 做了哪些事情，希望大家如果有后台新项目要开发，建议基于 [vue-admin-template](https://github.com/PanJiaChen/vue-admin-template) 来开发，而 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 更多的是用来当做一个集成方案，你要什么功能就去里面找拿来用，因为两者的基础架构是一样的，所以复用成本也很低。
+这篇文章主要是介绍了 **vueAdmin** 做了哪些事情，希望大家如果有后台新项目要开发，建议基于 [vue-admin-template](https://github.com/jonny6015/vue-admin-template) 来开发，而 [vue-element-admin](https://github.com/jonny6015/vue-element-admin) 更多的是用来当做一个集成方案，你要什么功能就去里面找拿来用，因为两者的基础架构是一样的，所以复用成本也很低。
 
 ## 占坑
 
 常规占坑，这里是手摸手，带你用 vue 撸后台系列。
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 - [手摸手，带你用 vue 撸后台 系列一（基础篇）](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 - [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)

@@ -1,4 +1,4 @@
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 系列文章：
 
@@ -28,7 +28,7 @@
 > 首先我们不管什么权限，来实现最基础的登录功能。
 
 随便找一个空白页面撸上两个 input 的框，一个是登录账号，一个是登录密码。再放置一个登录按钮。我们将登录按钮上绑上 click 事件，点击登录之后向服务端提交账号和密码进行验证。
-这就是一个最简单的登录页面。如果你觉得还要写的更加完美点，你可以在向服务端提交之前对账号和密码做一次简单的校验。[详细代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/login/index.vue)
+这就是一个最简单的登录页面。如果你觉得还要写的更加完美点，你可以在向服务端提交之前对账号和密码做一次简单的校验。[详细代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/login/index.vue)
 
 ![](https://lc-gold-cdn.xitu.io/da4e0c8127e6dc3264a7)
 
@@ -293,7 +293,7 @@ export default permission;
 ### 侧边栏
 
 最后一个涉及到权限的地方就是侧边栏，不过在前面的基础上已经很方便就能实现动态显示侧边栏了。这里侧边栏基于 element-ui 的 NavMenu 来实现的。
-代码有点多不贴详细的代码了，有兴趣的可以直接去 github 上看[地址](https://github.com/PanJiaChen/vue-element-admin/tree/master/src/views/layout/components/Sidebar)，或者直接看关于侧边栏的[文档](https://panjiachen.github.io/vue-element-admin-site/#/router-and-nav)。
+代码有点多不贴详细的代码了，有兴趣的可以直接去 github 上看[地址](https://github.com/jonny6015/vue-element-admin/tree/master/src/views/layout/components/Sidebar)，或者直接看关于侧边栏的[文档](https://panjiachen.github.io/vue-element-admin-site/#/router-and-nav)。
 
 说白了就是遍历之前算出来的`permission_routers`，通过 vuex 拿到之后动态 v-for 渲染而已。不过这里因为有一些业务需求所以加了很多判断
 比如我们在定义路由的时候会加很多参数
@@ -426,12 +426,12 @@ this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
 ```
 
 登录成功之后不直接跳到首页而是让用户两步登录，选择登录得平台。
-接下来就是所有第三方登录一样的地方通过 OAuth2.0 授权。这个各大平台大同小异，大家自行查阅文档，不展开了，就说一个微信授权比较坑的地方。**注意**你连参数的顺序都不能换，不然会验证不通过。[具体代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/login/socialsignin.vue)，同时我也封装了[openWindow](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/utils/openWindow.js)方法大家自行看吧。
+接下来就是所有第三方登录一样的地方通过 OAuth2.0 授权。这个各大平台大同小异，大家自行查阅文档，不展开了，就说一个微信授权比较坑的地方。**注意**你连参数的顺序都不能换，不然会验证不通过。[具体代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/login/socialsignin.vue)，同时我也封装了[openWindow](https://github.com/jonny6015/vue-element-admin/blob/master/src/utils/openWindow.js)方法大家自行看吧。
 当第三方授权成功之后都会跳到一个你之前有一个传入 redirect——uri 的页面
 ![](https://lc-gold-cdn.xitu.io/6a155caa0fba81f0d188)
 如微信还必须是你授权账号的一级域名。所以你授权的域名是 vue-element-admin.com,你就必须重定向到 vue-element-admin.com/xxx/下面，所以你需要写一个重定向的服务，如 vue-element-admin.com/auth/redirect?a.com 跳到该页面时会再次重定向给 a.com。
 
-所以我们后台也需要开一个 authredirect 页面：[代码](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/views/login/authredirect.vue)。他的作用是第三方登录成功之后会默认跳到授权的页面，授权的页面会再次重定向回我们的后台，由于是 spa，改变路由的体验不好，我们通过`window.opener.location.href`的方式改变 hash，在 login.js 里面再监听 hash 的变化。当 hash 变化时，获取之前第三方登录成功返回的 code 与第一步账号密码登录之后返回的 uid 一同发送给服务端验证是否正确，如果正确，这时候就是真正的登录成功。
+所以我们后台也需要开一个 authredirect 页面：[代码](https://github.com/jonny6015/vue-element-admin/blob/master/src/views/login/authredirect.vue)。他的作用是第三方登录成功之后会默认跳到授权的页面，授权的页面会再次重定向回我们的后台，由于是 spa，改变路由的体验不好，我们通过`window.opener.location.href`的方式改变 hash，在 login.js 里面再监听 hash 的变化。当 hash 变化时，获取之前第三方登录成功返回的 code 与第一步账号密码登录之后返回的 uid 一同发送给服务端验证是否正确，如果正确，这时候就是真正的登录成功。
 
 ```
  created() {
@@ -458,14 +458,14 @@ this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
    }
 ```
 
-到这里涉及登录权限的东西也差不多讲完了，这里楼主只是给了大家一个实现的思路(都是楼主不断摸索的血泪史)，每个公司实现的方案都有些出入，请谨慎选择适合自己业务形态的解决方案。如果有什么想法或者建议欢迎去本项目下留言，一同[讨论](https://github.com/PanJiaChen/vue-element-admin/issues/new)。
+到这里涉及登录权限的东西也差不多讲完了，这里楼主只是给了大家一个实现的思路(都是楼主不断摸索的血泪史)，每个公司实现的方案都有些出入，请谨慎选择适合自己业务形态的解决方案。如果有什么想法或者建议欢迎去本项目下留言，一同[讨论](https://github.com/jonny6015/vue-element-admin/issues/new)。
 
 ---
 
 ## 占坑
 
 常规占坑，这里是手摸手，带你用 vue 撸后台系列。
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 - [手摸手，带你用 vue 撸后台 系列一（基础篇）](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 - [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)

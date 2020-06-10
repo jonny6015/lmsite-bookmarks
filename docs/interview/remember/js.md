@@ -139,7 +139,7 @@ Object.create = function(o) {
 
 延伸： Object.create(null) vs {}
 
-https://panjiachen.github.io/awesome-bookmarks/blog/js.html#object-create-null-vs
+https://lmsite.cn/blog/js.html#object-create-null-vs
 
 <!-- TODO -->
 

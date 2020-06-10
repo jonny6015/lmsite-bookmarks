@@ -315,7 +315,7 @@ requireAll(req)
 
 ## 占坑
 
-本文所涉及的技术在 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 中可以找到完整的实例。
+本文所涉及的技术在 [vue-element-admin](https://github.com/jonny6015/vue-element-admin) 中可以找到完整的实例。
 `vue-element-admin`也发布了新版本和配套的[中文文档](https://panjiachen.github.io/vue-element-admin-site/#/)(文档真的写的我要吐血了)不管使不使用本项目都推荐一看，应该能对你写 vue 的项目有所帮助。欢迎使用和提出不足。
 楼主个人免费[圈子](https://jianshiapp.com/circles/1209)。
 

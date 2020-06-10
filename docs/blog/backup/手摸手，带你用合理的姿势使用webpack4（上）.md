@@ -1,4 +1,4 @@
-> 本文作者来自 [华尔街见闻技术团队](https://www.zhihu.com/org/hua-er-jie-jian-wen-ji-zhu-tuan-dui-92/activities) - [花裤衩](https://github.com/PanJiaChen)
+> 本文作者来自 [华尔街见闻技术团队](https://www.zhihu.com/org/hua-er-jie-jian-wen-ji-zhu-tuan-dui-92/activities) - [花裤衩](https://github.com/jonny6015)
 
 前几天 webpack 作者 [Tobias Koppers](https://github.com/sokra) 发布了一篇新的文章 [webpack 4.0 to 4.16: Did you know?](https://medium.com/webpack/webpack-4-0-to-4-16-did-you-know-71e25a57fa6b)(需翻墙)，总结了一下`webpack 4`发布以来，做了哪些调整和优化。
 并且说自己正在着手开发 `webpack 5`。
@@ -28,7 +28,7 @@
 
 ### 前言
 
-我一直认为模仿和借鉴是学习一个新东西最高效的方法。所以我建议还是通过借鉴一些成熟的 webpack 配置比较好。比如你项目是基于 react 生态圈的话可以借鉴 [create-react-app](https://github.com/facebook/create-react-app) ，下载之后`npm run eject` 就可以看到它详细的 webpack 配置了。vue 的话由于新版`vue cli`不支持 `eject`了，而且改用 [webpack-chain](https://github.com/mozilla-neutrino/webpack-chain)来配置，所以借鉴起来可能会不太方便，主要配置 [地址](https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/config)。觉得麻烦的话你可以直接借鉴 `vue-element-admin` 的 [配置](https://github.com/PanJiaChen/vue-element-admin/pull/889)。或者你想自己发挥，你可以借鉴 webpack 官方的各种 [examples](https://github.com/webpack/webpack/tree/master/examples)，来组合你的配置。
+我一直认为模仿和借鉴是学习一个新东西最高效的方法。所以我建议还是通过借鉴一些成熟的 webpack 配置比较好。比如你项目是基于 react 生态圈的话可以借鉴 [create-react-app](https://github.com/facebook/create-react-app) ，下载之后`npm run eject` 就可以看到它详细的 webpack 配置了。vue 的话由于新版`vue cli`不支持 `eject`了，而且改用 [webpack-chain](https://github.com/mozilla-neutrino/webpack-chain)来配置，所以借鉴起来可能会不太方便，主要配置 [地址](https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/cli-service/lib/config)。觉得麻烦的话你可以直接借鉴 `vue-element-admin` 的 [配置](https://github.com/jonny6015/vue-element-admin/pull/889)。或者你想自己发挥，你可以借鉴 webpack 官方的各种 [examples](https://github.com/webpack/webpack/tree/master/examples)，来组合你的配置。
 
 ### 升级 webpack
 
@@ -236,7 +236,7 @@ module.exports = file => require('@/views/' + file + '.vue').default
 module.exports = file => () => import('@/views/' + file + '.vue')
 ```
 
-但由于 webpack `import`实现机制问题，会产生一定的副作用。如上面的写法就会导致`@/views/`下的 所有`.vue` 文件都会被打包。不管你是否被依赖引用了，会多打包一些可能永远都用不到 js 代码。 [相关 issue](https://github.com/PanJiaChen/vue-element-admin/issues/292)
+但由于 webpack `import`实现机制问题，会产生一定的副作用。如上面的写法就会导致`@/views/`下的 所有`.vue` 文件都会被打包。不管你是否被依赖引用了，会多打包一些可能永远都用不到 js 代码。 [相关 issue](https://github.com/jonny6015/vue-element-admin/issues/292)
 
 目前新的解决方案思路还是一样的，只在生成模式中使用路由懒加载，本地开发不使用懒加载。但换了一种没副作用的实现方式。
 

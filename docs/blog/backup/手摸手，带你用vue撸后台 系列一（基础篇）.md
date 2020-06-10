@@ -1,4 +1,4 @@
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 系列文章：
 
@@ -19,7 +19,7 @@
 ## 目录结构
 
 ```shell
-├── build                      // 构建相关  
+├── build                      // 构建相关
 ├── config                     // 配置相关
 ├── src                        // 源代码
 │   ├── api                    // 所有请求
@@ -373,7 +373,7 @@ npm install --registry=https://registry.npm.taobao.org
 ## 占坑
 
 常规占坑，这里是手摸手，带你用 vue 撸后台系列。
-完整项目地址：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+完整项目地址：[vue-element-admin](https://github.com/jonny6015/vue-element-admin)
 
 - [手摸手，带你用 vue 撸后台 系列一（基础篇）](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
 - [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)
@@ -386,5 +386,5 @@ npm install --registry=https://registry.npm.taobao.org
 - [手摸手，带你用合理的姿势使用 webpack4（下）](https://juejin.im/post/5b5d6d6f6fb9a04fea58aabc)
 
 [1]: /img/bVMYUY
-[2]: https://github.com/PanJiaChen/vue-element-admin/blob/master/.eslintrc.js
-[3]: https://github.com/PanJiaChen/vue-element-admin/blob/master/src/utils/request.js
+[2]: https://github.com/jonny6015/vue-element-admin/blob/master/.eslintrc.js
+[3]: https://github.com/jonny6015/vue-element-admin/blob/master/src/utils/request.js
