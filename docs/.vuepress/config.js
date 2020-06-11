@@ -1,9 +1,9 @@
 const utils = require('./utils')
 
 module.exports = {
-  title: 'awesome-bookmarks',
+  title: 'LmSite-Start',
   description: '个人收藏夹',
-  base: '/awesome-bookmarks/',
+  base: '/',
   head: [
     [
       'link',
@@ -51,7 +51,7 @@ module.exports = {
     ],
     sidebar: utils.inferSiderbars(),
     lastUpdated: '上次更新',
-    repo: 'PanJiaChen/awesome-bookmarks',
+    repo: 'jonny6015/lmsite-bookmarks',
     editLinks: true,
     docsDir: 'docs',
     editLinkText: '在 GitHub 上编辑此页',
