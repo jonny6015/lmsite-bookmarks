@@ -14,11 +14,9 @@ echo "已成功拉取最新代码！"
 ##############################################################
 # 生成静态文件
 cd /src/lmsite-bookmarks
-npm install
+
 npm run build
-# 进入生成的文件夹,创建.nojekyll 防止Github Pages build错误
-cd /src/lmsite-bookmarks/docs/.vuepress/dist
-touch .nojekyll
+
 # 部署
 rm -r -f /webroot/lmsite.cn
 cp -r -f /src/lmsite-bookmarks/docs/.vuepress/dist /webroot/lmsite.cn
